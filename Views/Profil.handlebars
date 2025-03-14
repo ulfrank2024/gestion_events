@@ -1,0 +1,61 @@
+
+<div class="block1_profil">
+        <h1 class="titredasboead">Tableau de Bord</h1>
+    <div class="profil1">
+            <div class="block1_profil1">
+                    <p class="poste">{{user.role}}</p>
+                    <div class="block_profil2">
+                        <div class="items_profil1">
+                            <p>nom</p>
+                            <p>: {{user.name}}</p>
+                        </div>
+                        <div class="items_profil2">
+                            <p>email</p>
+                            <p>: {{user.email}}</p>
+                        </div>
+                    </div>
+                </div>
+            <div class="containerNotifications">
+                 <p class="poste">Notification</p>
+                <div class="containerNotification">
+                    <!-- Les notifications seront injectées ici via JavaScript -->
+                </div>
+            </div>
+     </div>
+ <a href="/Creer_Evenement" class="creerevenement">Créer un événement !!!</a>
+</div>
+ 
+<div class="dashboard">
+    <div class="administrateur">
+        <div class="elemetdasbordparticipant">
+            <div class="elementAdmin">
+                <div class="adminparticipant">
+                    <i class="fas fa-calendar-plus"></i>
+                    <p>Nombre d'événements enregistrés</p>
+                </div>
+                <p>{{eventCount}}</p>
+            </div>
+            <div class="elementAdmin">
+                <div class="adminparticipant">
+                    <i class="fas fa-user-graduate"></i>
+                    <p>Nombre d'étudiants sur la plateforme</p>
+                </div>
+                <p>{{studentCount}}</p>
+            </div>
+            <div class="elementAdmin">
+                <div class="adminparticipant">
+                    <i class="fas fa-star"></i>
+                    <p>Niveau de satisfaction</p>
+                </div>
+                <p>{{satisfactionLevel}}%</p>
+            </div>
+        </div>
+
+        <section id="evenement">
+            <h2 class="titredernierEvenement">Liste des événements enregistrés</h2>
+           <div class="contenuDernierEvenement" id="events-container">
+            
+           </div>
+        </section>
+    </div>
+</div>

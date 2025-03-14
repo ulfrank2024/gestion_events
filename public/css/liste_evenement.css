@@ -1,0 +1,468 @@
+ /* Style du Header avec une image de fond */
+header {
+    background-image: url('/assest/page_evenement.jpg'); 
+    background-size: cover; 
+    background-position: center;
+    color: white; 
+    text-align: center; 
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: -1; 
+}
+
+/* Style du titre du header */
+header h1 {
+    font-size: 4em; 
+    margin: 0; 
+    z-index: 1; 
+}
+
+
+header nav ul {
+    list-style-type: none; /* Enlever les puces de la liste */
+    padding: 0; /* Supprimer le padding de la liste */
+    margin: 10px 0; /* Ajouter un espacement entre le titre et le menu */
+}
+
+header nav ul li {
+    display: inline-block; /* Mettre les éléments de la liste en ligne */
+    margin-right: 20px; /* Ajouter un espace entre les éléments du menu */
+}
+
+header nav ul li a {
+    text-decoration: none; /* Enlever le souligné sur les liens */
+    color: white; /* Couleur des liens (blanc ici) */
+    font-size: 1.2em; /* Taille du texte des liens */
+    transition: color 0.3s; /* Ajouter une transition fluide lors du survol */
+}
+
+header nav ul li a:hover {
+    color: #FFD700; /* Changer la couleur du texte lors du survol (jaune doré ici) */
+}
+
+/* Style pour le champ de recherche */
+header nav ul li input[type="text"] {
+    padding: 8px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    width: 200px; /* Largeur du champ de recherche */
+    margin-left: 20px; /* Ajouter un peu d'espace à gauche du champ */
+}
+
+header nav ul li input[type="text"]:focus {
+    outline: none; /* Enlever le contour lors du focus */
+    border: 2px solid #FFD700; /* Mettre un contour jaune doré lorsque l'input est focus */
+}
+
+            
+            /* Styles pour les icônes sous le header */
+        .icons-section {
+            background: gainsboro;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .icons-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 14px;
+            color: black;
+            transition: transform 0.3s ease-in-out;
+        }
+        .icon-item img {
+            width: 50px;
+            height: 50px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .icon-item:hover {
+            transform: scale(1.2);
+        }
+        .icon-item:hover img {
+            transform: rotate(10deg);
+        }
+    
+            .hero {
+                position: relative;
+                background-image: url("../assest/prof.jpg");
+                background-size: cover;
+                height: 70vh;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .hero-content {
+                background-color: rgba(128, 128, 128, 0.586);
+                height: 300px;
+                padding: 20px;
+                border-radius: 20px;
+                text-align: center;
+            }
+    
+            .hero-content h1 {
+                font-size: 4rem;
+                margin: 0;
+            }
+    
+            .cta-button {
+                background-color: #ff9d00;
+                color: white;
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: all 0.3s ease-in-out;
+                margin-top: 20px;
+            }
+    
+            .cta-button:hover {
+                border-color: rgba(0, 0, 0, 0.5);
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+                transform: scale(1.1);
+                cursor: pointer;
+            }
+    
+            .category, .news-item, .doc {
+                background: white;
+                padding: 10px 15px;
+                border-radius: 8px;
+                box-shadow: white;
+                transition: transform 0.3s;
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+                margin: 10px;
+            }
+    
+            .category img, .news-item img, .doc img {
+                width: 100%;
+                height: auto;
+                max-height: 300px;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+    
+            .category:hover, .news-item:hover, .doc:hover {
+                transform: scale(1.1);
+            }
+    
+            .category:hover img, .news-item:hover img, .doc:hover img {
+                opacity: 0.8;
+            }
+    
+            .categories, .news, .docs {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                padding: 5px;
+                flex-wrap: wrap;
+            }
+            .buttons {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 10px;
+            }
+    
+            .btn {
+                padding: 8px 15px;
+                background-color: rgba(0, 128, 128, 0.8);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+    
+            .btn:hover {
+                background-color:black;
+            }
+  /* Section des actualités */
+.actualites {
+    background-color: rgba(128, 128, 128, 0.973);/* Fond clair pour la section */
+    padding: 40px 0;
+    text-align: center;
+}
+
+.actualites h2 {
+    font-size: 2.5rem;
+    color: black; /* Couleur du titre */
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 30px;
+}
+/* Conteneur des articles d'actualités */
+.news {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Item d'actualité */
+.news-item {
+    background-color:white; /* Fond blanc pour chaque article */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.news-item img {
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+/* Boutons sous chaque article */
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: rgb(130, 179, 238);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #45a049; /* Légère modification de la couleur au survol */
+}
+
+/* Responsivité pour petits écrans */
+@media (max-width: 768px) {
+    .news {
+        grid-template-columns: 1fr; /* Affichage en une colonne sur petits écrans */
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+          
+ /* Section Calendrier */
+#calendrier {
+    background-color: #F0F4F1;
+    padding: 40px 0;
+    text-align: center;
+}
+
+#calendrier h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Conteneur Flexbox pour aligner le calendrier et l'image */
+.calendar-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 20px;
+    width: 65%;  /* Prendre 65% de la largeur pour le calendrier */
+    max-width: 800px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.month {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.navigation button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #4CAF50;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.navigation button:hover {
+    color: #333;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.calendar-day {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.calendar-date {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.calendar-date span {
+    font-size: 1.3rem;
+    color: #f9f9f9;
+}
+
+.calendar-date:hover {
+    transform: translateY(-5px);
+    background-color: #2e34ac;
+    color: white;
+}
+
+.event {
+   background: #222;
+    color: white;
+}
+
+.event:hover {
+    background-color: rgb(42, 136, 165);
+}
+
+.event-label {
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* Style de l'image */
+.calendar-image {
+    width: 30%;  /* L'image prendra 30% de la largeur */
+    text-align: center;
+}
+
+.calendar-image img {
+    width: 100%;  /* L'image prendra toute la largeur disponible */
+    max-width: 400px;  /* Taille maximale de l'image */
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsivité pour écrans plus petits */
+@media (max-width: 768px) {
+    .calendar-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .calendar {
+        width: 90%;  /* Le calendrier prendra 90% de la largeur sur les petits écrans */
+    }
+
+    .calendar-image {
+        width: 90%;
+        margin-top: 20px;
+    }
+}
+
+#temoignages {
+    background-color: black;
+    padding: 40px 0;
+    text-align: center;
+}
+
+#temoignages h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.temoignages-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.temoignage {
+    max-width: 350px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.temoignage:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.message {
+    background: rgb(130, 175, 238);
+    color: white;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    font-style: italic;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.temoignage p:last-child {
+    font-weight: bold;
+    color: #fff;
+    margin-top: 10px;
+}
+     
+
+    

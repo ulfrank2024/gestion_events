@@ -1,0 +1,166 @@
+<section id="hero">
+    <div class="hero-content">
+        <h1>Bienvenue à eSchool</h1>
+        <p>Apprenez, innovez et transformez votre avenir avec eSchool</p>
+        <a href="/listeEvenements" class="ctabutton">Nos futures Évenements</a>
+    </div>
+</section>
+<section class="activites">
+            <h2>Évènement à venir</h2>
+            <div class="wrapper">
+                <div class="container">
+                    <input type="radio" name="slide" id="card1" checked>
+                    <label for="card1" class="card card1">        
+                        <div class="row">
+                            <div class="description">
+                                <h4>tournois</h4>
+                                <p>rencontre  sportive de diver dicipline</p>
+                                <!-- <a href="html/football.html" class="card-link">entrer ici</a> -->
+                                <a href="/" class="card-link"><span class="underline">Entrer Ici</span></a>
+
+                            </div>
+                        </div>
+                    </label>
+
+                    <input type="radio" name="slide" id="card2">
+                    <label for="card2" class="card card2">
+                        
+                        <div class="row">
+                            <div class="description">
+                                <h4>Conference</h4>
+                                <p>tous ce qui concerne les Conference</p>
+                                <a href="/" class="card-link"><span class="underline">Entrer Ici</span></a>
+
+                            </div>
+                        </div>
+                    </label>
+
+                    <input type="radio" name="slide" id="card3">
+                    <label for="card3" class="card card3">
+                        
+                        <div class="row">
+                            <div class="description">
+                                <h4>festival</h4>
+                                <p>Les fin de semaine bouilland</p>
+                                <a href="/" class="card-link"><span class="underline">Entrer Ici</span></a>
+
+                            </div>
+                        </div>
+                    </label>
+
+                    <input type="radio" name="slide" id="card4">
+                    <label for="card4" class="card card4">
+                        
+                        <div class="row">
+                            <div class="description">
+                                <h4>Education</h4>
+                                <p>au tour d'une table d'etude</p>
+                                <a href="/" class="card-link"><span class="underline">Entrer Ici</span></a>
+
+                            </div>
+                        </div>
+                    </label>
+
+                    <input type="radio" name="slide" id="card5">
+                    <label for="card5" class="card card5">
+                        <div class="row">
+                            <div class="description">
+                                <h4>Saison</h4>
+                                <p>decouvre les evenemt propre au une saison</p>
+                                <a href="html/gym.html" class="card-link"><span class="underline">Entrer Ici</span></a>
+
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+
+<!-- À propos de l'université -->
+ <section class="presentation">
+            <div class="presentation-box">
+                <h2>QUI SOMMES-NOUS ?</h2>
+                <p>Nous sommes une plateforme dédiée à la gestion des événements scolaires, facilitant l'organisation et la participation des élèves et du personnel éducatif.</p>
+                <ul>
+                    <li>Un espace centralisé pour la création, la gestion et le suivi des événements scolaires.</li>
+                    <li>Une interface intuitive permettant aux enseignants et aux élèves de rester informés des activités à venir.</li>
+                    <li>Un environnement accueillant et convivial.</li>
+                </ul>
+            </div>
+            <div class="presentation-box">
+                <h2>NOUS REJOINDRE</h2>
+                <p>Rejoignez notre plateforme et simplifiez la gestion des événements scolaires.</p>
+                <p>Créez un compte pour accéder aux fonctionnalités avancées et gérer efficacement vos événements.</p>
+                {{#if user}}
+               <a id="profil-link"  class="btn register">Hello!!!</a>
+                 {{else}}
+                <a href="/connexion" class="btn register">sign-in!!!</a>
+                {{/if}}
+            </div>
+        </section>
+ 
+<!-- Statistiques -->
+<section id="stats">
+    <h2>Nos Chiffres Clés</h2>
+    <div class="stats-cards">
+        <div class="cart">
+            <h3>10 000+</h3>
+            <p>Étudiants formés</p>
+        </div>
+        <div class="cart">
+            <h3>28+</h3>
+            <p>evenement disponibles</p>
+        </div>
+        <div class="cart">
+            <h3>50+</h3>
+            <p>Professeurs experts et evenementiels</p>
+        </div>
+    </div>
+</section>
+
+<!-- Section événements -->
+<section id="evenement">
+    <h2 class="titredernierEvenement">Nos Derniers événements</h2>
+    <div class="contenuDernierEvenement">
+        <div class="blockevenement">
+            <img
+                src="/assest/participant.jpg"
+                alt="Événement 1"
+                width="400px"
+                height="300px"
+            />
+            <h3>evenement de fin de formation</h3>
+            <p>sur le theme la joie</p>
+            <p class="price">dans une ambiance de folie le college la cite nous a fais traverser le ciel en Bleu avec plusieur artiste invite.!!! c'etait superb!!!</p>
+        </div>
+        <div class="blockevenement">
+            <img
+                src="/assest/meeting.jpg"
+                alt="Événement 2"
+                width="400px"
+                height="300px"
+            />
+            <h3>echange sur la geomatique</h3>
+            <p>recherche</p>
+            <p class="price">organisé par le UQO nous avons eu droit a plusieur represntant international pour apporter plus d'effet a cette branche</p>
+           
+        </div>
+        <div class="blockevenement">
+            <img
+                src="/assest/acceuil.jpg"
+                alt="Événement 3"
+                width="400px"
+                height="300px"
+            />
+            <h3>remise de diplome</h3>
+            <p>fin d'etude promotion 2025 cite collegial</p>
+            <p class="price">apres plusieur mois d'etude, automne hiver printemps nous voici rendu a la remise des diplome des jeune lorea et meilleur promotion !!!</p>
+        </div>
+    </div>
+</section>
+
+<!-- Section Contact -->
+<section id="">
+    <a href="/about" class="ctabutton">Contactez-nous -> </a> 
+</section>

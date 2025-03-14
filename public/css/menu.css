@@ -1,0 +1,127 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Oswald', sans-serif;
+    line-height: 1.2;
+    background-color: #fdfdfd;
+    color: #000000;
+}
+.site-logo {
+    height: 70px; 
+    margin-right: 10px; 
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: space-around;
+     background-color: black;
+     padding-top: 15px;
+     padding-bottom: 15px;
+
+
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #f0f0f0; 
+    text-decoration: none;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px #000;
+    padding: 10px 20px;
+  
+}
+
+.nav-links-active {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background-color: beige;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.profiltop{
+    height: 4px;
+}
+
+.ensemble_profil{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:5px;
+  padding: 0;
+  margin: 0;
+  height:4px;
+}
+.nom_profil{
+color: beige;
+font-style: italic;
+font-size: small;
+}
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nav-toggle .bar {
+    width: 30px;
+    height: 4px;
+    background: white;
+    transition: all 0.3s ease-in-out;
+}
+@media screen and (max-width: 768px) {
+    .nav-toggle {
+        display: flex;
+     
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 110px;
+        left: 0;
+        width: 100%;
+         background-color: rgba(107, 21, 21, 0.784);
+        padding: 15px;
+    
+      
+    }
+
+    .nav-links a {
+        padding: 10px;
+    }
+
+    .nav-links.nav-links-active {
+        display: flex;
+    }
+
+    /* Effet croix quand le menu est ouvert */
+    .nav-toggle.open .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .nav-toggle.open .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.open .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}

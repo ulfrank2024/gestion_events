@@ -1,0 +1,54 @@
+<nav aria-label="Main Navigation" class="nav-container">
+    <div class="site-name">
+        <a href="/listeEvenements">
+            <img
+                src="/assest/logoprincipal.png"
+                alt="Logo texte de GES"
+                class="site-logo"
+            />
+        </a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="/listeEvenements">Acceuil</a></li>
+        <li><a href="/About">Contact</a></li>
+      {{#if user}}
+   <li>
+    <a href="#" id="logoutBtn">
+        <i class="fas fa-sign-out-alt"></i>
+        Déconnexion
+    </a>
+</li>
+
+
+  <li>
+ <a id="profil-link" >
+        <div class="ensemble_profil">
+            <i class="fas fa-user-circle"></i>
+            <p class="nom_profil">{{user.role}}:</p>
+            <p class="nom_profil">{{user.name}}</p>
+        </div>
+    </a>
+</li>
+
+{{else}}
+    <li>
+        <a href="/connexion">
+            <i class="fas fa-user"></i>
+            Connexion
+        </a>
+    </li>
+    <li>
+        <a href="/creer_compte">
+            <i class="fas fa-user-plus"></i>
+            Créer un compte
+        </a>
+    </li>
+{{/if}}
+
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle Navigation Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+</nav>

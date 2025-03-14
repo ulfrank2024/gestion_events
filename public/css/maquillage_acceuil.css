@@ -1,0 +1,293 @@
+#hero {
+  background-image: url("../assest/acceuil_page.jpg");
+  background-size: cover;
+  height: 70vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-content{
+    background-color: rgba(128, 128, 128, 0.586);
+    height: 300px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#hero h1 {
+  font-size: 4rem;
+}
+
+.ctabutton {
+  background-color: #ff9d00f4;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+    transition: all 0.3s ease-in-out; 
+}
+.ctabutton:hover {
+    border-color: rgba(0, 0, 0, 0.5); 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
+    transform: scale(2);
+    cursor: pointer; 
+    background-color: #ff9d00;
+}
+#stats {
+  background-color: gray;
+  color: white; /* Couleur du texte pour le contraste */
+  padding: 20px 20px; /* Ajoute de l'espace intérieur */
+  text-align: center; /* Centre le texte */
+}
+.stats-cards {
+  display: flex;
+  justify-content: center; /* Centre les cartes horizontalement */
+  gap: 20px; /* Espacement entre les cartes */
+  flex-wrap: wrap; /* Permet le retour à la ligne sur petits écrans */
+}
+
+.cart {
+  background: orange;
+  color: black; /* Texte en noir */
+  padding: 20px;
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour effet visuel */
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: green;
+  color: white;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+section {
+  padding: 50px;
+}
+.courses-grid {
+  display: flex;
+  gap: 20px; /* Espacement entre les cartes */
+  justify-content: space-between; /* Aligner les cartes avec de l'espace entre elles */
+}
+
+.course-card {
+  border: 1px solid #ddd;
+  padding: 50px;
+  width: 100%; /* Ajuster la largeur des cartes */
+  text-align: center;
+}
+
+.course-card img {
+  max-width: 100px; /* Limiter la largeur des images à la largeur de la carte */
+  height: 50px; /* Définir une hauteur spécifique pour les images */
+  object-fit: cover; /* Couper l'image si elle dépasse pour garder la proportion */
+}
+
+.titredernierEvenement {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.contenuDernierEvenement{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+}
+.blockevenement {
+    border: 1px solid rgba(0, 0, 0, 0.2); 
+    border-radius: 10px;
+    padding: 15px; 
+    transition: all 0.3s ease-in-out; 
+      background-color: white;
+      color: black;
+}
+
+.blockevenement:hover {
+    border-color: rgba(0, 0, 0, 0.5); 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
+    transform: scale(1.03);
+    cursor: pointer; 
+}
+.activites {
+    text-align: center;
+    padding: 2.5rem 1.25rem;
+    background: beige;
+    flex: 1;
+}
+
+.activites h2 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: black;
+}
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    width: 12.5rem;
+    height: 18.75rem;
+    border-radius: .75rem;
+    background-size: cover;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2rem;
+    margin: 1.25rem;
+    display: flex;
+    align-items: flex-end;
+    transition: transform .6s cubic-bezier(.28,-0.03,0,.99), width .6s cubic-bezier(.28,-0.03,0,.99), height .6s cubic-bezier(.28,-0.03,0,.99);
+    box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.card1, .card2, .card3, .card4, .card5, .card6 {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card1 {
+    background-image: url('../assest/soccer.jpg');
+}
+
+.card2 {
+    background-image: url('../assest/connexion.jpg');
+}
+
+.card3 {
+    background-image: url('../assest/partie.jpg');
+}
+
+.card4 {
+    background-image: url('../assest/cour.jpg');
+}
+
+.card5 {
+    background-image: url('../assest/saison.jpg');
+}
+
+
+.card > .row {
+    color: white;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.card > .row > .description {
+    display: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden; 
+    height: 15rem;
+    width: 60%;
+    opacity: 0;
+    transform: translateY(1.875rem);
+    transition-delay: .3s;
+    transition: all .3s ease;
+    background-color: rgba(128, 128, 128, 0.804);
+    border-top-right-radius: 15px;
+}
+.card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 30px;
+    width: 100%;
+    background-color: #ff9d00;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+
+.card-link:hover .description {
+    opacity: 1;
+    transform: translateY(0);
+    background-color: rgba(128, 128, 128, 0.896);
+}
+
+.description p {
+    color: white;
+    text-shadow: #000;
+    padding-top: 0.3125rem;
+    display:block;
+    margin-left: 0.3125rem;
+}
+
+.description h4 {
+    color:black;
+    font-weight: 1000;
+    text-transform: uppercase;
+    text-shadow: #000;
+}
+
+input {
+    display: none;
+}
+
+.card:hover .description {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.presentation {
+    display: flex;
+    justify-content: space-around;
+    padding: 2.5rem 1.25rem;
+    flex-wrap: wrap;
+}
+
+.presentation-box {
+    width: 45%;
+    margin-bottom: 1.25rem;
+}
+
+.presentation h2 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: black;
+}
+
+.presentation .btn {
+    display: inline-block;
+    margin-top: 1.25rem;
+    padding: 0.625rem 1.25rem;
+    background: beige;
+    color: black;
+    text-decoration: none;
+    border-radius: 0.3125rem;
+}
+.price{
+  width: 400px;
+  text-align: start;
+}

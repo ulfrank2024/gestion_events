@@ -1,0 +1,92 @@
+.principal {
+  font-family: "Roboto", Arial, sans-serif;
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 20px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+   background: #1a1a1a;
+  
+}
+/* Container */
+.container {
+  width: 50%;
+background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700; /* Lighter text */
+  letter-spacing: 1px; /* Subtle spacing */
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700; /* Lighter text */
+  letter-spacing: 1px; /* Subtle spacing */
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Form layout */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form group  */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+/* Input fields */
+input[type="text"],
+input[type="date"],
+input[type="file"],
+textarea {
+  padding: 10px;
+  background-color: #333;
+  border: 1px solid #0f7f6c;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 16px;
+}
+
+/* Textarea */
+textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+/* Button */
+button {
+  padding: 15px;
+  background-color: #0f7f6c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #0d6b55;
+}

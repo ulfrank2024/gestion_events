@@ -1,0 +1,74 @@
+.principals {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #202228;
+    color: white;
+}
+.imageReseauxSociaux img {
+    width: 50px;
+    height: auto;
+}
+
+.second {
+    
+    padding: 2.5rem 1.25rem;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: auto;
+    width: 100%;
+}
+
+.second-section {
+    margin-bottom: 1.25rem;
+}
+
+.second-section h3 {
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 1.25rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 0.625rem;
+   text-decoration: none;
+    
+}
+
+
+a {
+    color: white;
+    text-decoration: none;
+    font-weight: 300;
+    text-decoration: none;
+
+}
+
+.copyrit {
+    font-style: italic;
+}
+@media screen and (max-width: 768px) {
+    .principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  
+}
+.second {
+    
+    padding: 2.5rem 1.25rem;
+    display: flex;
+flex-direction: column;
+}
+   
+}

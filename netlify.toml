@@ -1,0 +1,6 @@
+[build]
+  command = "npm start"
+  timeout = 1200 # 20 minutes
+
+[context.production.environment]
+  NODE_ENV = "production"
