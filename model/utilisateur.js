@@ -22,6 +22,7 @@ export async function getUtilisateurByCourriel(courriel) {
     try {
         return await connexion.get(`SELECT * FROM users WHERE email = ?`, [
             courriel,
+            
         ]);
     } catch (error) {
         console.error(
