@@ -4,7 +4,7 @@
     justify-content: space-around;
     background-image: url("../assest/compte.jpg");
     background-size: cover;
-    height: 90vh;
+    height: 100vh;
 }
 .login-container {
     display: flex;
@@ -28,9 +28,7 @@ form {
     align-items: stretch;
 }
 
-input,
-select,
-button {
+.but{
     width: 100%;
     padding: 12px;
     margin: 8px 0;
@@ -128,9 +126,7 @@ input {
         font-size: 20px;
     }
 
-    input,
-    select,
-    button {
+    .but{
         padding: 10px;
     }
 }
@@ -144,9 +140,12 @@ input {
         font-size: 18px;
     }
 
-    input,
-    select,
-    button {
+   .but {
         padding: 8px;
     }
+      .principal{
+
+  height: 10vh;
+ 
+}
 }

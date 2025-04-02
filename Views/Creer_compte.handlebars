@@ -4,13 +4,14 @@
 
   <form action="/create-account" method="post">
     <label for="name">Votre Nom</label>
-    <input type="text" name="name" placeholder="Votre Nom" required />
+    <input type="text" name="name" placeholder="Votre Nom" class="but" required />
 
     <label for="email">Votre Email</label>
-    <input type="email" name="email" placeholder="Votre Email" required />
+    <input type="email" name="email" placeholder="Votre Email" class="but" required />
 
     <label for="password">Votre Mot de passe</label>
     <input
+     class="but"
       type="password"
       name="password"
       placeholder="Votre Mot de passe"
@@ -19,6 +20,7 @@
 
     <label for="confirm-password">Confirmer le Mot de passe</label>
     <input
+     class="but"
       type="password"
       name="confirmPassword"
       placeholder="Confirmer le Mot de passe"
@@ -32,12 +34,12 @@
     </select>
 
       <label>
-        <input type="checkbox" name="terms" required />
+        <input type="checkbox" name="terms" required class="but" />
         J'accepte les termes et conditions
       </label>
 
 
-    <button type="submit">Créer un compte</button>
+    <button type="submit" class="but">Créer un compte</button>
 
     <p>Déjà un compte? <a href="/connexion">Se connecter</a></p>
   </form>

@@ -15,12 +15,32 @@
                         </div>
                     </div>
                 </div>
-            <div class="containerNotifications">
-                 <p class="poste">Notification</p>
-                <div class="containerNotification">
-                    <!-- Les notifications seront injectées ici via JavaScript -->
-                </div>
+      <div class="containerNotifications">
+    <p class="poste">Satisfaction</p>
+    <div class="containerNotification">
+        <!-- Formulaire de satisfaction avec cercles -->
+        <form id="satisfactionForm">
+            <label for="rating">Votre note :</label>
+            <div class="rating-circles">
+                <!-- Cercles pour la note (1 à 5) -->
+                <button type="button" class="rating-circle circlee1" data-rating="1">1</button>
+                <button type="button" class="rating-circle circlee2" data-rating="2">2</button>
+                <button type="button" class="rating-circle circlee2" data-rating="3">3</button>
+                <button type="button" class="rating-circle circlee3" data-rating="4">4</button>
+                <button type="button" class="rating-circle circlee3" data-rating="5">5</button>
             </div>
+
+            <button type="submit">Envoyer la satisfaction</button>
+        </form>
+
+        <!-- Message de confirmation -->
+        <div id="confirmationMessage" style="display:none;">
+            <p>Merci pour votre évaluation !</p>
+        </div>
+    </div>
+</div>
+
+
      </div>
     
 

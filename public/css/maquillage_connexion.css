@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 120vh;
   margin: 0;
   font-family: "Poppins", sans-serif;
 }
@@ -31,9 +31,7 @@ form {
   align-items: stretch;
 }
 
-input,
-select,
-button {
+.but{
   width: 100%;
   padding: 12px;
   margin: 8px 0;
@@ -143,9 +141,12 @@ input {
     font-size: 18px;
   }
 
-  input,
-  select,
-  button {
+.but{
     padding: 8px;
   }
+  .principal{
+
+  height: 110vh;
+ 
+}
 }

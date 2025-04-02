@@ -8,7 +8,8 @@ export async function createEvent(
     date,
     location,
     organizer_id,
-    image_url
+    image_url,
+    category // Ajouter la catégorie ici
 ) {
     // Vérifier si un événement existe déjà à la même date et dans la même salle
     const existingEvent = await connexion.get(
@@ -17,29 +18,59 @@ export async function createEvent(
     );
 
     if (existingEvent) {
-        // Envoyer une notification à l'organisateur
         await createNotification(
             organizer_id,
             `La salle est déjà réservée pour l'événement "${existingEvent.title}" à cette date.`
         );
-
         throw new Error(
             "Impossible de créer l'événement : la salle est déjà réservée à cette date."
         );
     }
 
-    // Insérer le nouvel événement
+    // Insérer le nouvel événement avec la catégorie
     await connexion.run(
-        "INSERT INTO events (title, description, date, location, organizer_id, image_url) VALUES (?, ?, ?, ?, ?, ?)",
-        [title, description, date, location, organizer_id, image_url]
+        "INSERT INTO events (title, description, date, location, organizer_id, image_url, category) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [title, description, date, location, organizer_id, image_url, category]
     );
 
-    // Ajouter une notification pour l'organisateur
     await createNotification(
         organizer_id,
         `Un nouvel événement a été créé : ${title}`
     );
 }
+//fonction pour recuperer tous les element par cathegorie
+export async function GetEventsByCategory(category) {
+    try {
+        const events = await connexion.all(
+            "SELECT * FROM events WHERE category = ?",
+            [category]
+        );
+        return events;
+    } catch (error) {
+        console.error(
+            "Erreur lors de la récupération des événements par catégorie :",
+            error
+        );
+        throw error;
+    }
+}
+export async function GetEventCountByCategory() {
+    try {
+        const categories = await connexion.all(`
+            SELECT category, COUNT(*) as count
+            FROM events
+            GROUP BY category
+        `);
+        return categories;
+    } catch (error) {
+        console.error(
+            "Erreur lors de la récupération du nombre d'événements par catégorie :",
+            error
+        );
+        throw error;
+    }
+}
+
 
 //fonction pour recuperer tous les element
 export async function GetAllEvent() {
@@ -94,57 +125,74 @@ export async function updateEvent(
     description,
     date,
     location,
-    image_url
+    organizer_id,
+    image_url,
+    category
 ) {
-    try {
-        // Vérifier si l'événement existe
-        const event = await connexion.get("SELECT * FROM events WHERE id = ?", [
-            eventId,
-        ]);
+    // Vérification si l'événement existe déjà
+    const existingEvent = await connexion.get(
+        "SELECT id FROM events WHERE id = ?",
+        [eventId]
+    );
 
-        if (!event) {
-            console.error("Événement non trouvé dans la base de données !");
-            return null;
-        }
-
-        // Mise à jour de l'événement
-        const result = await connexion.run(
-            "UPDATE events SET title = ?, description = ?, date = ?, location = ?, image_url = ? WHERE id = ?",
-            [title, description, date, location, image_url, eventId]
-        );
-        // Ajouter une notification pour l'organisateur
-        await createNotification(
-            event.organizer_id,
-            `l'événement "${title}" a été modifié.`
-        );
-
-        // Vérification si une ligne a été modifiée
-        if (result.changes === 0) {
-            console.error("Aucune modification effectuée !");
-            return null;
-        }
-
-        return { id: eventId, title, description, date, location, image_url };
-    } catch (error) {
-        console.error("Erreur lors de la modification de l'événement :", error);
-        throw error;
+    if (!existingEvent) {
+        throw new Error("Événement non trouvé");
     }
+
+    // Mise à jour de l'événement
+    await connexion.run(
+        `UPDATE events
+         SET title = ?, description = ?, date = ?, location = ?, organizer_id = ?, image_url = ?, category = ?
+         WHERE id = ?`,
+        [
+            title,
+            description,
+            date,
+            location,
+            organizer_id,
+            image_url,
+            category,
+            eventId,
+        ]
+    );
+
+    return {
+        eventId,
+        title,
+        description,
+        date,
+        location,
+        organizer_id,
+        image_url,
+        category,
+    };
 }
 
+
+// Fonction pour récupérer un événement par ID
 // Fonction pour récupérer un événement par ID
 // Fonction pour récupérer un événement par ID
 export async function GetEventById(id) {
     try {
-        // Utilisation de la connexion directement, sans openDb()
         const event = await connexion.get("SELECT * FROM events WHERE id = ?", [
             id,
         ]);
+
+        // Vérification si l'événement est trouvé
+        if (!event) {
+            console.log(`Aucun événement trouvé pour l'ID ${id}`);
+            return null;
+        }
+
         return event;
     } catch (error) {
         console.error("Erreur lors de la récupération de l'événement :", error);
+        console.error("Détails de l'erreur :", error.stack); // Afficher la stack trace complète
         throw error;
     }
 }
+
+
 
 // Fonction pour compter le nombre d'événements auxquels un étudiant est inscrit
 export async function getEventCountForStudent(user_id) {

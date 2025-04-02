@@ -68,6 +68,9 @@ textarea {
   color: #fff;
   font-size: 16px;
 }
+input[type="datetime-local"]:focus {
+    width: 200px; /* Largeur augmentée lorsque cliqué */
+}
 
 /* Textarea */
 textarea {
@@ -89,4 +92,14 @@ button {
 
 button:hover {
   background-color: #0d6b55;
+}
+@media screen and (max-width: 768px) {
+  .container {
+  width: 90%;
+}
+  .flatpickr-calendar {
+        width: 90% !important; /* Réduit la largeur sur mobile */
+        max-width: 300px; /* Évite qu'il devienne trop grand */
+    }
+
 }

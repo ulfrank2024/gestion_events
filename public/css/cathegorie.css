@@ -1,0 +1,82 @@
+/* Style pour la section principale */
+.container {
+    margin: 0 auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+ 
+    
+}
+
+
+/* Style pour le titre de la catégorie */
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 90px;
+}
+
+/* Style pour le message si aucun événement n'est trouvé */
+.message {
+    text-align: center;
+    color: #ff4d4d; /* Couleur rouge pour signaler un problème */
+    font-weight: bold;
+     height: 30vh;
+}
+
+/* Style pour la liste d'événements */
+.events-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    text-align: center;
+}
+
+/* Style pour chaque carte d'événement */
+.event-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+    transform: scale(1.05);
+}
+
+/* Style pour les titres des événements */
+.event-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Style pour les détails des événements (date, lieu, description) */
+.event-card p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+/* Style pour les images des événements */
+.event-card img {
+    width: 280px;
+    height: 200px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.retour{
+    color: white;
+    background-color: gray;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50px;
+   
+}
+.desc{
+    width: 200px;
+}

@@ -16,40 +16,43 @@
                     </div>
                 </div>
             <div class="containerNotifications">
-                 <p class="poste">Notification</p>
-                <div class="containerNotification">
-                    <!-- Les notifications seront injectées ici via JavaScript -->
-                </div>
+               <a href="/Creer_Evenement" class="creerevenement">Créer un événement !!!</a>  
             </div>
      </div>
- <a href="/Creer_Evenement" class="creerevenement">Créer un événement !!!</a>
+
 </div>
- 
-<div class="dashboard">
+ <div class="dashboard">
     <div class="administrateur">
+        <h1 class="titredasboead1">Statistiques</h1>
         <div class="elemetdasbordparticipant">
             <div class="elementAdmin">
                 <div class="adminparticipant">
                     <i class="fas fa-calendar-plus"></i>
                     <p>Nombre d'événements enregistrés</p>
                 </div>
-                <p>{{eventCount}}</p>
+                <!-- Canvas pour le graphique des événements -->
+                <canvas id="event_chart" width="400" height="400"></canvas>
             </div>
             <div class="elementAdmin">
                 <div class="adminparticipant">
                     <i class="fas fa-user-graduate"></i>
-                    <p>Nombre d'étudiants sur la plateforme</p>
+                    <p>Nombre d'inscriptions sur la plateforme</p>
                 </div>
-                <p>{{studentCount}}</p>
+                <!-- Canvas pour le graphique des inscriptions -->
+                <canvas id="student_chart" width="400" height="400"></canvas>
             </div>
             <div class="elementAdmin">
                 <div class="adminparticipant">
                     <i class="fas fa-star"></i>
                     <p>Niveau de satisfaction</p>
                 </div>
-                <p>{{satisfactionLevel}}%</p>
+                <!-- Canvas pour le graphique de satisfaction -->
+                <canvas id="satisfaction_chart" width="400" height="400"></canvas>
             </div>
         </div>
+    </div>
+</div>
+
 
         <section id="evenement">
             <h2 class="titredernierEvenement">Liste des événements enregistrés</h2>
@@ -59,3 +62,7 @@
         </section>
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+

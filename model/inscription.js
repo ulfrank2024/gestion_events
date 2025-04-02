@@ -1,5 +1,6 @@
 import { connexion } from "../db/db.js";
 import { createNotification } from "../model/notification.js";
+import { sendEmail } from "../service/emailService.js"; // Import du service d'email
 
 // Inscription à un événement
 export async function registerForEvent(user_id, event_id) {
@@ -20,13 +21,19 @@ export async function registerForEvent(user_id, event_id) {
             [user_id, event_id]
         );
 
-        // Ajouter une notification pour l'utilisateur
-        await createNotification(
-            user_id,
-            `Vous êtes inscrit à l'événement ID: ${event_id}`
-        );
+        // Récupérer l'email de l'utilisateur
+        const user = await connexion.get("SELECT email FROM users WHERE id = ?", [user_id]);
+        if (!user || !user.email) {
+            throw new Error("Impossible de récupérer l'adresse e-mail de l'utilisateur.");
+        }
 
-        return { success: true, message: "Inscription réussie !" };
+        // Ajouter une notification pour l'utilisateur
+        await createNotification(user_id, `Vous êtes inscrit à l'événement ID: ${event_id}`);
+
+        // Envoyer un email de confirmation
+        await sendEmail(user.email, "Inscription confirmée", `Vous êtes inscrit à l'événement ID: ${event_id}`);
+
+        return { success: true, message: "Inscription réussie et email envoyé !" };
     } catch (error) {
         console.error("Erreur lors de l'inscription à l'événement :", error);
         throw error;
@@ -41,13 +48,19 @@ export async function cancelEventRegistration(user_id, event_id) {
             [user_id, event_id]
         );
 
-        // Ajouter une notification pour l'utilisateur
-        await createNotification(
-            user_id,
-            `Vous avez annulé votre inscription à l'événement ID: ${event_id}`
-        );
+        // Récupérer l'email de l'utilisateur
+        const user = await connexion.get("SELECT email FROM users WHERE id = ?", [user_id]);
+        if (!user || !user.email) {
+            throw new Error("Impossible de récupérer l'adresse e-mail de l'utilisateur.");
+        }
 
-        return { success: true, message: "Inscription annulée !" };
+        // Ajouter une notification pour l'utilisateur
+        await createNotification(user_id, `Vous avez annulé votre inscription à l'événement ID: ${event_id}`);
+
+        // Envoyer un email de confirmation d'annulation
+        await sendEmail(user.email, "Annulation d'inscription", `Vous avez annulé votre inscription à l'événement ID: ${event_id}`);
+
+        return { success: true, message: "Inscription annulée et email envoyé !" };
     } catch (error) {
         console.error("Erreur lors de l'annulation de l'inscription :", error);
         throw error;
@@ -63,10 +76,7 @@ export async function getStudentEventCount(user_id) {
         );
         return result.count;
     } catch (error) {
-        console.error(
-            "Erreur lors de la récupération du nombre d'événements :",
-            error
-        );
+        console.error("Erreur lors de la récupération du nombre d'événements :", error);
         throw error;
     }
 }
@@ -86,3 +96,23 @@ export async function getStudentEvents(user_id) {
         throw error;
     }
 }
+export async function getnumberInscription() {
+    try {
+        // Récupérer le nombre d'inscriptions à la plateforme par mois
+        const registrations = await connexion.all(
+            `SELECT strftime('%Y-%m', created_at) AS month, COUNT(*) AS count
+             FROM users
+             GROUP BY strftime('%Y-%m', created_at)
+             ORDER BY month ASC`
+        );
+
+        return registrations;
+    } catch (error) {
+        console.error(
+            "Erreur lors de la récupération des inscriptions :",
+            error
+        );
+        throw error;
+    }
+}
+

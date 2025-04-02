@@ -9,10 +9,7 @@ header {
     display: flex;
     justify-content: center;
     flex-direction: column;
-
 }
-
-
 header::before {
     content: "";
     position: absolute;
@@ -82,14 +79,18 @@ header nav ul li input[type="text"]:focus {
             gap: 40px;
             flex-wrap: wrap;
         }
-        .icon-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 14px;
-            color: black;
-            transition: transform 0.3s ease-in-out;
-        }
+      .icon-item {
+    opacity: 0; /* Caché au départ */
+    transform: translateY(20px); /* Décalé vers le bas */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Classe qui sera ajoutée via JavaScript */
+.icon-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
         .icon-item img {
             width: 50px;
             height: 50px;
@@ -261,163 +262,19 @@ header nav ul li input[type="text"]:focus {
 .btn:hover {
     background-color: #45a049; /* Légère modification de la couleur au survol */
 }
-
 /* Responsivité pour petits écrans */
-@media (max-width: 768px) {
-    .news {
-        grid-template-columns: 1fr; /* Affichage en une colonne sur petits écrans */
-    }
-
-    .buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
-          
- /* Section Calendrier */
-#calendrier {
-    background-color: #F0F4F1;
-    padding: 40px 0;
-    text-align: center;
-}
-
-#calendrier h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    color: #333;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Conteneur Flexbox pour aligner le calendrier et l'image */
-.calendar-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.calendar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    padding: 20px;
-    width: 65%;  /* Prendre 65% de la largeur pour le calendrier */
-    max-width: 800px;
-}
-
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.month {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-}
-
-.navigation button {
-    background-color: transparent;
-    border: none;
-    font-size: 1.5rem;
-    color: #4CAF50;
-    cursor: pointer;
-    transition: color 0.3s ease;
-}
-
-.navigation button:hover {
-    color: #333;
-}
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    font-size: 1.2rem;
-    text-align: center;
-}
-
-.calendar-day {
-    font-weight: bold;
-    color: #4CAF50;
-}
-
-.calendar-date {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.calendar-date span {
-    font-size: 1.3rem;
-    color: #f9f9f9;
-}
-
-.calendar-date:hover {
-    transform: translateY(-5px);
-    background-color: #2e34ac;
-    color: white;
-}
-
-.event {
-   background: #222;
-    color: white;
-}
-
-.event:hover {
-    background-color: rgb(42, 136, 165);
-}
-
-.event-label {
-    font-size: 0.8rem;
-    display: block;
-    margin-top: 5px;
-    font-weight: bold;
-}
-
-/* Style de l'image */
-.calendar-image {
-    width: 30%;  /* L'image prendra 30% de la largeur */
-    text-align: center;
-}
-
-.calendar-image img {
-    width: 100%;  /* L'image prendra toute la largeur disponible */
-    max-width: 400px;  /* Taille maximale de l'image */
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-/* Responsivité pour écrans plus petits */
-@media (max-width: 768px) {
-    .calendar-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .calendar {
-        width: 90%;  /* Le calendrier prendra 90% de la largeur sur les petits écrans */
-    }
-
-    .calendar-image {
-        width: 90%;
-        margin-top: 20px;
-    }
-}
 
 #temoignages {
     background-color: black;
     padding: 40px 0;
     text-align: center;
+     opacity: 0; /* Caché au départ */
+    transform: translateY(30px); /* Déplacé vers le bas */
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+#temoignages.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 #temoignages h2 {
@@ -463,6 +320,51 @@ header nav ul li input[type="text"]:focus {
     color: #fff;
     margin-top: 10px;
 }
-     
+.events-list{
+    display: flex;
+    gap : 20px
+}
+.listeevent{
+    background-color: white;
 
+}
+@media (max-width: 600px) {
+    header h1 {
+    font-size: 25px
+  
+}
+.news {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    margin-top: 20px;
+}
+.events-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+}
+header nav ul li a {
+    text-decoration: none; /* Enlever le souligné sur les liens */
+    color: white; /* Couleur des liens (blanc ici) */
+    font-size: 1em; /* Taille du texte des liens */
+    transition: color 0.3s; /* Ajouter une transition fluide lors du survol */
+}
+  .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 10px;
+            color: black;
+            transition: transform 0.3s ease-in-out;
+        }
+        .icon-item img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+}
+     
     

@@ -18,6 +18,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 document.getElementById("organizer_id").value =
                     event.organizer_id;
 
+                // Pré-remplir la catégorie
+                const categorySelect = document.getElementById("category");
+                if (categorySelect) {
+                    // Si l'événement a une catégorie, on sélectionne l'option correspondante
+                    const category = event.category || "autre"; // Valeur par défaut
+                    categorySelect.value = category;
+                }
+
                 // Modifier le bouton de soumission
                 document.querySelector(".btn").textContent =
                     "Modifier Événement";
@@ -28,42 +36,55 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    form.addEventListener("submit", async (event) => {
-        event.preventDefault(); // Empêche le rechargement de la page
+  form.addEventListener("submit", async (event) => {
+      event.preventDefault(); // Empêche le rechargement de la page
 
-        errorMessage.textContent = ""; // Efface le message d'erreur précédent
+      errorMessage.textContent = ""; // Efface le message d'erreur précédent
 
-        const formData = new FormData(form); // Récupère les données du formulaire
-        let url = "/create";
-        let method = "POST";
+      const formData = new FormData(form); // Récupère les données du formulaire
 
-        if (eventId) {
-            url = `/update/${eventId}`;
-            method = "PUT";
-        }
+      // Vérification de la catégorie envoyée
+      const category = formData.get("category");
+      console.log("Catégorie envoyée:", category); // Ajoute ce log pour vérifier
 
-        try {
-            const response = await fetch(url, {
-                method: method,
-                body: formData, // Envoie les données avec l'image
-            });
+      // Si la catégorie n'est pas valide, la remplacer par 'autre'
+      const validCategories = [
+          "conférence",
+          "atelier",
+          "sport",
+          "culture",
+          "autre",
+      ];
+      if (!validCategories.includes(category)) {
+          formData.set("category", "autre"); // Remplace par 'autre' si catégorie invalide
+      }
 
-            const result = await response.json();
+      let url = "/create";
+      let method = "POST";
 
-            if (response.ok) {
-                alert(
-                    eventId
-                        ? "Événement modifié avec succès !"
-                        : "Événement créé avec succès !"
-                );
-                window.location.href = "/profil"; // Redirige après soumission
-            } else {
-                errorMessage.textContent = result.message; // Affiche le message d'erreur en rouge sous le bouton
-            }
-        } catch (error) {
-            console.error("Erreur lors de l'envoi du formulaire :", error);
-            errorMessage.textContent =
-                "Une erreur est survenue. Veuillez réessayer.";
-        }
-    });
+      if (eventId) {
+          url = `/update/${eventId}`;
+          method = "PUT";
+      }
+
+      try {
+          const response = await fetch(url, {
+              method: method,
+              body: formData, // Envoie les données avec l'image
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+              window.location.href = "/profil"; // Redirige après soumission
+          } else {
+              errorMessage.textContent = result.message; // Affiche le message d'erreur en rouge sous le bouton
+          }
+      } catch (error) {
+          console.error("Erreur lors de l'envoi du formulaire :", error);
+          errorMessage.textContent =
+              "Une erreur est survenue. Veuillez réessayer.";
+      }
+  });
+
 });

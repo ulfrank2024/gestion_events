@@ -23,6 +23,7 @@ main{
     gap:10px;
     padding-top: 50px;
     padding-bottom: 20px;
+    height: 70vh;
 }
 
 .imagedescription{
@@ -58,4 +59,26 @@ main{
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); 
     transform: scale(1.03);
     cursor: pointer; 
+}
+@media screen and (max-width: 768px) {
+.blockevenement{
+
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+ 
+}
+.blockevenement1{
+    margin-left: 0px;
+    width: 300px;
+}
+.imagedescription{
+    width: 300px;
+   border-radius: 10px;
+    
+}
+main{
+
+    height: 90vh;
+}
 }

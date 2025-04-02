@@ -13,15 +13,18 @@ import expressHandlebars from "express-handlebars";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import fs from 'fs';
+import { sendEmail } from "./service/emailService.js";
 
 
 import { createNotification, deleteNotification, getNotifications } from "./model/notification.js"
+import { siteSatisfaction, ateSiteSatisfaction } from "./model/satisfaction.js";
 
 import {
     registerForEvent,
     cancelEventRegistration,
     getStudentEventCount,
     getStudentEvents,
+    getnumberInscription
 } from "./model/inscription.js";
 import {
 
@@ -30,7 +33,15 @@ import {
     addUtilisateur,
     GetUserProfile,
 } from "./model/utilisateur.js";
-import { createEvent,GetEventDetailsById, GetAllEvent, DeletEvent, updateEvent,GetEventById,getEventCountForStudent,getTotalStudents,getTotalEvents,checkIfEventExists} from "./model/evement.js";
+import {
+    createEvent, GetEventDetailsById,
+    GetAllEvent, DeletEvent,
+    updateEvent, GetEventById,
+    getEventCountForStudent,
+    getTotalStudents,
+    getTotalEvents, checkIfEventExists,
+    GetEventsByCategory, GetEventCountByCategory
+} from "./model/evement.js";
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import path from "path";
@@ -91,13 +102,26 @@ app.use((req, res, next) => {
 
     next();
 });
+app.use((req, res, next) => {
+    res.setHeader(
+        "Content-Security-Policy",
+        "default-src 'self'; " + // Source par défaut pour tout
+            "script-src 'self' https://cdn.jsdelivr.net; " + // Autoriser les scripts de CDN jsdelivr pour Chart.js
+            "style-src 'self' 'unsafe-inline'; " + // Autoriser les styles inline
+            "object-src 'none'; " + // Interdire les objets comme Flash
+            "img-src 'self';"
+    ); // Permettre les images locales
+    next();
+});
+
+
 
 // Routes principales
 app.get("/", async (req, res) => {
-    res.render("Acceuil", {
+    res.render("listeEvenements", {
         titre: "Accueil | EvenementScolaire",
-        style: ["/css/maquillage_acceuil.css"],
-        script: ["/js/navbar.js"],
+        style: ["/css/liste_evenement.css", "/css/listeevenment.css"],
+        script: ["/js/lisedesEvenement.js", "/js/itemsCathegorie.js"],
         user: req.user,
     });
 });
@@ -109,6 +133,28 @@ app.get("/About", async (req, res) => {
         script: [],
         user: req.user,
     });
+});
+router.get("/categories/:category", async (req, res) => {
+    try {
+        const category = req.params.category;
+
+        // Récupérer les événements correspondant à cette catégorie
+        const events = await GetEventsByCategory(category);
+
+        // Rendre la page avec les événements récupérés
+        res.render("cathegories", {
+            titre: `${category} | Événements Scolaires`,
+            style: ["/css/cathegorie.css"],
+            script: ["/js/cathegorie.js"],
+            user: req.user, // Si tu gères l'authentification
+            category,
+            events,
+            message: events.length === 0 ? "Aucun événement trouvé." : null,
+        });
+    } catch (error) {
+        console.error("Erreur lors de la récupération des événements :", error);
+        res.status(500).send("Erreur serveur.");
+    }
 });
 
 app.get("/connexion", async (req, res) => {
@@ -170,16 +216,6 @@ app.get("/creer_evenement", async (req, res) => {
         event: eventData, // Passer les données de l'événement
     });
 });
-
-app.get("/listeEvenements", async (req, res) => {
-    res.render("listeEvenements", {
-        titre: "ClisteEvenements | EvenementScolaire",
-        style: ["/css/liste_evenement.css", "/css/profil.css"],
-        script: ["/js/lisedesEvenement.js"],
-    });
-});
-
-
 app.get("/profil", async (req, res) => {
     try {
         const userId = req.user ? req.user.id : null; // Vérifie que `req.user` existe
@@ -195,12 +231,15 @@ app.get("/profil", async (req, res) => {
         const events = await GetAllEvent(); // Récupérer les événements
         const notifications = await getNotifications(userId); // 🔥 Récupération des notifications
 
-
         // Passer les données à la vue
         res.render("profil", {
             titre: "Profil | EvenementScolaire",
             style: ["/css/profil.css"],
-            script: ["/js/page_profil.js", "/js/notification.js"],
+            script: [
+                "/js/page_profil.js",
+                "/js/notification.js",
+                "/js/dashboard.js",
+            ],
             user: req.user,
             eventCount,
             studentCount,
@@ -213,6 +252,27 @@ app.get("/profil", async (req, res) => {
         res.status(500).send("Erreur serveur");
     }
 });
+
+app.get("/api/profil-data", async (req, res) => {
+    console.log("Utilisateur connecté dans API :", req.user); // 🔥 Vérification
+
+    if (!req.user) {
+        return res.status(401).json({ error: "Utilisateur non connecté" });
+    }
+
+    try {
+        const eventCount = await getTotalEvents();
+        const studentCount = await getTotalStudents();
+        const satisfactionLevel = 85;
+
+        res.json({ eventCount, studentCount, satisfactionLevel });
+    } catch (error) {
+        console.error("Erreur serveur :", error);
+        res.status(500).json({ error: "Erreur serveur" });
+    }
+});
+
+
 app.get("/profil_participant", async (req, res) => {
     try {
         const userId = req.user ? req.user.id : null;
@@ -224,8 +284,12 @@ app.get("/profil_participant", async (req, res) => {
 
         res.render("profil_participant", {
             titre: "profil_participant | EvenementScolaire",
-            style: ["/css/profil.css"],
-            script: ["/js/page_profil_participant.js", "/js/notification.js"],
+            style: ["/css/profil.css", "/css/satisfaction.css"],
+            script: [
+                "/js/page_profil_participant.js",
+                "/js/notification.js",
+                "/js/satisfactionss.js",
+            ],
             user: req.user,
             eventCount,
             evenements: events,
@@ -257,6 +321,7 @@ router.get("/evenement/:id", async (req, res) => {
             event,
             style: ["/css/page_evenement.css"],
             script: ["/js/page_evenement.js"],
+            user: req.user,
         });
     } catch (error) {
         res.status(500).send("Erreur serveur");
@@ -271,16 +336,50 @@ router.get("/evenement/:id", async (req, res) => {
 router.post("/register", async (req, res) => {
     try {
         const { name, email, password, role } = req.body;
+
+        // Vérifier si l'utilisateur existe déjà
         const existingUser = await getUtilisateurByCourriel(email);
-        if (existingUser) return res.status(400).json({ message: "Utilisateur déjà existant" });
-        const userId = await addUtilisateur(name, email, password, role || "participant");
-        if (!userId) return res.status(500).json({ message: "Erreur lors de l'inscription" });
-        res.status(201).json({ message: "Utilisateur créé avec succès" });
+        if (existingUser)
+            return res
+                .status(400)
+                .json({ message: "Utilisateur déjà existant" });
+
+        // Ajouter l'utilisateur à la base de données
+        const userId = await addUtilisateur(
+            name,
+            email,
+            password,
+            role || "participant"
+        );
+        if (!userId)
+            return res
+                .status(500)
+                .json({ message: "Erreur lors de l'inscription" });
+
+        // Envoyer l'e-mail de bienvenue
+        const welcomeMessage = `
+            Bonjour ${name}, 🎉
+
+            Bienvenue sur School Event ! Nous sommes ravis de vous compter parmi nous.
+
+            Vous pouvez dès maintenant vous inscrire à vos événements préférés et recevoir des notifications.
+
+            À bientôt,
+            L'équipe School Event
+        `;
+
+        await sendEmail(email, "Bienvenue sur School Event 🎊", welcomeMessage);
+
+        res.status(201).json({
+            message: "Utilisateur créé avec succès et e-mail envoyé !",
+        });
     } catch (error) {
-        res.status(500).json({ message: "Erreur serveur", error: error.message });
+        res.status(500).json({
+            message: "Erreur serveur",
+            error: error.message,
+        });
     }
 });
-
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -333,41 +432,40 @@ router.post("/login", async (req, res) => {
         });
     }
 });
-
-
 app.get("/logout", (req, res) => {
     res.clearCookie("token");
     res.redirect("/connexion");
 });
-
-
-
 //****************************************************************************************** */
 //**********************// Routes API pour la gestion des evenements********************** */
 //****************************************************************************************** */
-
-
 router.post("/create", upload.single("image"), async (req, res) => {
     try {
-        const { title, description, date, location, organizer_id } = req.body;
-        const image_url = req.file ? `/uploads/${req.file.filename}` : null; // Récupération du chemin de l'image
+        const { title, description, date, location, organizer_id, category } =
+            req.body;
+        console.log("Catégorie reçue:", category); // Vérifie la catégorie reçue
 
-        // Vérification si un événement existe déjà à cette date et cet endroit
-        const existingEvent = await checkIfEventExists(date, location);
-        if (existingEvent) {
-            return res.status(409).json({
-                message: "La salle est déjà réservée à cette date.",
-            });
-        }
+        const image_url = req.file ? `/uploads/${req.file.filename}` : null;
 
-        // Création de l'événement
+        const validCategories = [
+            "conférence",
+            "atelier",
+            "sport",
+            "culture",
+            "autre",
+        ];
+        const eventCategory = validCategories.includes(category)
+            ? category
+            : "autre";
+
         await createEvent(
             title,
             description,
             date,
             location,
             organizer_id,
-            image_url
+            image_url,
+            eventCategory // Utilisation de la catégorie validée
         );
 
         res.status(201).json({ message: "Événement créé avec succès !" });
@@ -377,6 +475,42 @@ router.post("/create", upload.single("image"), async (req, res) => {
     }
 });
 
+
+// Route pour obtenir toutes les catégories d'événements
+router.get("/categories", async (req, res) => {
+    try {
+        const categories = await GetEventsByCategory(); // Obtenir les catégories depuis la base de données
+        res.status(200).json(categories); // Renvoie la liste des catégories
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erreur serveur lors de la récupération des catégories." });
+    }
+});
+router.get("/api/categories/:category", async (req, res) => {
+    try {
+        const category = req.params.category;
+
+        // Récupérer les événements correspondant à cette catégorie
+        const events = await GetEventsByCategory(category);
+
+        // Retourner les événements sous forme d'API
+        if (!events || events.length === 0) {
+            return res
+                .status(404)
+                .json({
+                    message: "Aucun événement trouvé pour cette catégorie.",
+                });
+        }
+
+        res.status(200).json(events);
+    } catch (error) {
+        console.error(
+            "Erreur lors de la récupération des événements via API :",
+            error
+        );
+        res.status(500).json({ message: "Erreur serveur." });
+    }
+});
 
 
 // Route pour récupérer tous les événements
@@ -493,8 +627,9 @@ router.put("/update/:id", upload.single("image"), async (req, res) => {
     try {
         console.log("Données reçues :", req.body); // 🔍 Debugging
 
-        const eventId = req.params.id; // ✅ Correction de l'ID
-        let { title, description, date, location, organizer_id } = req.body;
+        const eventId = req.params.id; // ✅ Récupération de l'ID
+        let { title, description, date, location, organizer_id, category } =
+            req.body;
         let image_url = req.body.image_url;
 
         if (!eventId) {
@@ -507,14 +642,28 @@ router.put("/update/:id", upload.single("image"), async (req, res) => {
             image_url = `/uploads/${req.file.filename}`;
         }
 
-        // 🔹 Vérifier si `date` est bien définie
+        // 🔹 Vérification si la catégorie est vide ou non définie
+        const validCategories = [
+            "conférence",
+            "atelier",
+            "sport",
+            "culture",
+            "autre",
+        ];
+        const eventCategory = (category || "autre").trim(); // Ajout de trim() pour éliminer les espaces
+
+        if (!validCategories.includes(eventCategory)) {
+            return res.status(400).json({ message: "Catégorie invalide" });
+        }
+
+        // 🔹 Vérification de la date
         if (!date || date.trim() === "") {
             return res
                 .status(400)
                 .json({ message: "La date est obligatoire." });
         }
 
-        // 🔄 Correction du format de `date` pour SQLite
+        // 🔄 Correction du format de la date pour SQLite
         const dateObj = new Date(date);
         const formattedDate = dateObj
             .toISOString()
@@ -523,12 +672,14 @@ router.put("/update/:id", upload.single("image"), async (req, res) => {
 
         console.log("Date formatée pour SQLite :", formattedDate);
         console.log("📢 Données envoyées à updateEvent :", {
-            eventId, // ✅ Utilisation correcte de l'ID
+            eventId,
             title,
             description,
             date: formattedDate,
             location,
+            organizer_id,
             image_url,
+            category: eventCategory, // ✅ Ajout de la catégorie
         });
 
         // 🔄 Mise à jour de l'événement
@@ -538,7 +689,9 @@ router.put("/update/:id", upload.single("image"), async (req, res) => {
             description,
             formattedDate,
             location,
-            image_url
+            organizer_id,
+            image_url,
+            eventCategory // ✅ Mise à jour de la catégorie
         );
 
         if (!updatedEvent) {
@@ -581,7 +734,16 @@ router.get("/events/:id", async (req, res) => {
             return res.status(404).json({ message: "Événement non trouvé" });
         }
 
-        res.json(event); // Retourne l'événement en JSON
+        // Si l'événement a une catégorie, elle est incluse dans la réponse
+        res.json({
+            id: event.id,
+            title: event.title,
+            description: event.description,
+            date: event.date,
+            location: event.location,
+            image_url: event.image_url,
+            category: event.category || "autre", // Catégorie par défaut si aucune catégorie n'est définie
+        });
     } catch (error) {
         res.status(500).json({
             message: "Erreur serveur",
@@ -729,8 +891,56 @@ app.get("/api/events/:user_id", async (req, res) => {
         res.status(500).json({ error: "Erreur serveur" });
     }
 });
+router.get("/count-by-category", async (req, res) => {
+    try {
+        const eventCounts = await GetEventCountByCategory();
+        res.json(eventCounts);
+    } catch (error) {
+        console.error("🚨 Erreur API :", error);
+        res.status(500).json({
+            error: "Erreur lors de la récupération des statistiques",
+        });
+    }
+});
+// Route API pour récupérer les inscriptions par mois
+app.get("/api/inscriptions", async (req, res) => {
+    try {
+    
+
+        // Appeler la fonction pour récupérer les inscriptions
+        const inscriptions = await getnumberInscription(); // Sinon, on récupère toutes les inscriptions
+
+        // Envoyer la réponse en JSON
+        res.json(inscriptions);
+    } catch (error) {
+        console.error("Erreur lors de la récupération des inscriptions:", error);
+        res.status(500).send("Erreur serveur");
+    }
+});
 
 
+// Récupérer la satisfaction globale du site
+router.get("/site-satisfaction", async (req, res) => {
+    const result = await siteSatisfaction();
+    if (result) {
+        res.json(result); // Renvoie la moyenne des notes et le nombre d'avis
+    } else {
+        res.status(500).json({ message: "Erreur lors de la récupération des satisfactions" });
+    }
+});
+
+// Enregistrer une évaluation de satisfaction pour le site
+router.post("/rate-site", async (req, res) => {
+    const { user_id, rating } = req.body;
+    
+    const result = await ateSiteSatisfaction(user_id, rating);
+    
+    if (result) {
+        res.status(201).json({ message: "Évaluation enregistrée avec succès !" });
+    } else {
+        res.status(500).json({ message: "Erreur lors de l'enregistrement de l'évaluation" });
+    }
+});
 
 // Attacher `router` à l'application
 app.use(router);

@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log("Utilisateur connecté avec ID :", data.user.id);
 
                 // Redirige vers la page d'accueil
-                window.location.href = "/ListeEvenements";
+                window.location.href = "/";
             } else {
                 errorMessage.textContent = `Erreur: ${data.message}`;
                 errorMessage.style.display = "block";
