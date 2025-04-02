@@ -1,166 +1,99 @@
-<section id="hero">
-    <div class="hero-content">
-        <h1>Bienvenue à eSchool</h1>
-        <p>Apprenez, innovez et transformez votre avenir avec eSchool</p>
-        <a href="/listeEvenements" class="ctabutton">Nos futures Évenements</a>
+<!-- Header -->
+<header>
+    <h1>LISTES DES EVENEMENTS</h1>
+    <nav>
+        <ul>
+            <li><a href="#">Veuillez faire la recherche de votre événement</a></li>
+            <li><input type="text" placeholder="Rechercher..."></li>
+        </ul>
+    </nav>
+</header>
+<!-- Section des icônes sous le header -->
+<section class="icons-section">
+    <div class="icons-container">
+        <div class="icon-item" data-category="conférence">
+            <img src="/assest/conference.png" alt="conference">
+            <p>conférence</p>
+        </div>
+        <div class="icon-item" data-category="atelier">
+            <img src="/assest/theatre.png" alt="theatre">
+            <p>atelier</p>
+        </div>
+        <div class="icon-item" data-category="sport">
+            <img src="/assest/sport.png" alt="sport">
+            <p>sport</p>
+        </div>
+        <div class="icon-item" data-category="culture">
+            <img src="/assest/art.png" alt="art">
+            <p>culture</p>
+        </div>
+        <div class="icon-item" data-category="autre">
+            <img src="/assest/escape-game.png" alt="escape-game">
+            <p>autre</p>
+        </div>
     </div>
 </section>
-<section class="activites">
-            <h2>Évènement à venir</h2>
-            <div class="wrapper">
-                <div class="container">
-                    <input type="radio" name="slide" id="card1" checked>
-                    <label for="card1" class="card card1">        
-                        <div class="row">
-                            <div class="description">
-                                <h4>tournois</h4>
-                                <p>rencontre  sportive de diver dicipline</p>
-                                <!-- <a href="html/football.html" class="card-link">entrer ici</a> -->
-                                <a href="/" class="card-link"><span class="underline">Entrer Ici</span></a>
 
-                            </div>
-                        </div>
-                    </label>
+<!-- Section des événements -->
+<section class="listeevent">
+<div class="dasboead">
+    <h1 class="titredasboead">Explorez nos Événements</h1>
+    <div class="administrateur">
+        <section id="evenement">
+            <div class="contenuDernierEvenement" id="events-container">
+                Chargement des événements...
+            </div>
+        </section>
+    </div>
+</div>
+</section>
 
-                    <input type="radio" name="slide" id="card2">
-                    <label for="card2" class="card card2">
-                        
-                        <div class="row">
-                            <div class="description">
-                                <h4>Conference</h4>
-                                <p>tous ce qui concerne les Conference</p>
-                                <a href="/" class="card-link"><span class="underline">Entrer Ici</span></a>
+<!-- Section des actualités -->
+<section class="actualites">
+    <h2>Actualités</h2>
+    <div class="news">
+        <div class="news-item">
+            <h3>Salle d'Événements</h3>
+            <img src="/assest/salleE.jpg" alt="Actualité 1" class="image_actualite">
+            <p>Découvrez notre salle spacieuse et moderne, idéale pour organiser vos événements professionnels et
+                privés.</p>
+        </div>
 
-                            </div>
-                        </div>
-                    </label>
+        <div class="news-item">
+            <h3>Salle de Réceptions et Divers</h3>
+            <img src="/assest/salle_evenement.jpg" alt="Actualité 2" class="image_actualite">
+            <p>Un cadre élégant et chaleureux pour vos réceptions, mariages, anniversaires et autres célébrations.</p>
+        </div>
 
-                    <input type="radio" name="slide" id="card3">
-                    <label for="card3" class="card card3">
-                        
-                        <div class="row">
-                            <div class="description">
-                                <h4>festival</h4>
-                                <p>Les fin de semaine bouilland</p>
-                                <a href="/" class="card-link"><span class="underline">Entrer Ici</span></a>
-
-                            </div>
-                        </div>
-                    </label>
-
-                    <input type="radio" name="slide" id="card4">
-                    <label for="card4" class="card card4">
-                        
-                        <div class="row">
-                            <div class="description">
-                                <h4>Education</h4>
-                                <p>au tour d'une table d'etude</p>
-                                <a href="/" class="card-link"><span class="underline">Entrer Ici</span></a>
-
-                            </div>
-                        </div>
-                    </label>
-
-                    <input type="radio" name="slide" id="card5">
-                    <label for="card5" class="card card5">
-                        <div class="row">
-                            <div class="description">
-                                <h4>Saison</h4>
-                                <p>decouvre les evenemt propre au une saison</p>
-                                <a href="html/gym.html" class="card-link"><span class="underline">Entrer Ici</span></a>
-
-                            </div>
-                        </div>
-                    </label>
+        <div class="news-item">
+            <h3>Salle de Réunions</h3>
+            <img src="/assest/salle de reunions.jpg" alt="Actualité 3" class="image_actualite">
+            <p>Un espace calme et équipé pour vos réunions d'affaires, séminaires et conférences.</p>
+        </div>
+    </div>
+</section>
+<section id="temoignages">
+    <div class="container">
+        <h2>Ce que nos clients disent</h2>
+        <div class="temoignages-list">
+            <div class="temoignage">
+                <div class="message">
+                    <p>"L'événement était incroyable, tout était parfaitement organisé!"</p>
                 </div>
+                <p>- Jean Dupont, Participant</p>
             </div>
-        </section>
-
-
-<!-- À propos de l'université -->
- <section class="presentation">
-            <div class="presentation-box">
-                <h2>QUI SOMMES-NOUS ?</h2>
-                <p>Nous sommes une plateforme dédiée à la gestion des événements scolaires, facilitant l'organisation et la participation des élèves et du personnel éducatif.</p>
-                <ul>
-                    <li>Un espace centralisé pour la création, la gestion et le suivi des événements scolaires.</li>
-                    <li>Une interface intuitive permettant aux enseignants et aux élèves de rester informés des activités à venir.</li>
-                    <li>Un environnement accueillant et convivial.</li>
-                </ul>
+            <div class="temoignage">
+                <div class="message">
+                    <p>"Un moment inoubliable, j'ai appris tellement de choses. Merci!"</p>
+                </div>
+                <p>- Marie Lefevre, Conférencière</p>
             </div>
-            <div class="presentation-box">
-                <h2>NOUS REJOINDRE</h2>
-                <p>Rejoignez notre plateforme et simplifiez la gestion des événements scolaires.</p>
-                <p>Créez un compte pour accéder aux fonctionnalités avancées et gérer efficacement vos événements.</p>
-                {{#if user}}
-               <a id="profil-link"  class="btn register">Hello!!!</a>
-                 {{else}}
-                <a href="/connexion" class="btn register">sign-in!!!</a>
-                {{/if}}
+            <div class="temoignage">
+                <div class="message">
+                    <p>"L'équipe a fait un travail exceptionnel, je recommande vivement."</p>
+                </div>
+                <p>- Pierre Martin, Sponsor</p>
             </div>
-        </section>
- 
-<!-- Statistiques -->
-<section id="stats">
-    <h2>Nos Chiffres Clés</h2>
-    <div class="stats-cards">
-        <div class="cart">
-            <h3>10 000+</h3>
-            <p>Étudiants formés</p>
-        </div>
-        <div class="cart">
-            <h3>28+</h3>
-            <p>evenement disponibles</p>
-        </div>
-        <div class="cart">
-            <h3>50+</h3>
-            <p>Professeurs experts et evenementiels</p>
         </div>
     </div>
-</section>
-
-<!-- Section événements -->
-<section id="evenement">
-    <h2 class="titredernierEvenement">Nos Derniers événements</h2>
-    <div class="contenuDernierEvenement">
-        <div class="blockevenement">
-            <img
-                src="/assest/participant.jpg"
-                alt="Événement 1"
-                width="400px"
-                height="300px"
-            />
-            <h3>evenement de fin de formation</h3>
-            <p>sur le theme la joie</p>
-            <p class="price">dans une ambiance de folie le college la cite nous a fais traverser le ciel en Bleu avec plusieur artiste invite.!!! c'etait superb!!!</p>
-        </div>
-        <div class="blockevenement">
-            <img
-                src="/assest/meeting.jpg"
-                alt="Événement 2"
-                width="400px"
-                height="300px"
-            />
-            <h3>echange sur la geomatique</h3>
-            <p>recherche</p>
-            <p class="price">organisé par le UQO nous avons eu droit a plusieur represntant international pour apporter plus d'effet a cette branche</p>
-           
-        </div>
-        <div class="blockevenement">
-            <img
-                src="/assest/acceuil.jpg"
-                alt="Événement 3"
-                width="400px"
-                height="300px"
-            />
-            <h3>remise de diplome</h3>
-            <p>fin d'etude promotion 2025 cite collegial</p>
-            <p class="price">apres plusieur mois d'etude, automne hiver printemps nous voici rendu a la remise des diplome des jeune lorea et meilleur promotion !!!</p>
-        </div>
-    </div>
-</section>
-
-<!-- Section Contact -->
-<section id="">
-    <a href="/about" class="ctabutton">Contactez-nous -> </a> 
 </section>

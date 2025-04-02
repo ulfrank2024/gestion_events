@@ -15,6 +15,9 @@ import { dirname } from "path";
 import fs from 'fs';
 import { sendEmail } from "./service/emailService.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 import { createNotification, deleteNotification, getNotifications } from "./model/notification.js"
 import { siteSatisfaction, ateSiteSatisfaction } from "./model/satisfaction.js";
@@ -118,7 +121,7 @@ app.use((req, res, next) => {
 
 // Routes principales
 app.get("/", async (req, res) => {
-    res.render("listeEvenements", {
+    res.render("Acceuil", {
         titre: "Accueil | EvenementScolaire",
         style: ["/css/liste_evenement.css", "/css/listeevenment.css"],
         script: ["/js/lisedesEvenement.js", "/js/itemsCathegorie.js"],
@@ -540,8 +543,6 @@ app.post("/upload", upload.single("photo"), (req, res) => {
 });
 // Route pour supprimer un événement par ID
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 router.delete("/events/:id", async (req, res) => {
     const eventId = req.params.id;
