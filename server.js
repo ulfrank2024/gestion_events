@@ -14,7 +14,9 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import fs from 'fs';
 import { sendEmail } from "./service/emailService.js";
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+console.log("__dirname:", __dirname); // Ajoutez cette ligne
 
 import { createNotification, deleteNotification, getNotifications } from "./model/notification.js"
 import { siteSatisfaction, ateSiteSatisfaction } from "./model/satisfaction.js";
@@ -69,7 +71,7 @@ app.use(express.static("public"));
 //multer    
 
 
-console.log("__dirname:", __dirname); // Ajoutez cette ligne
+
 
 const viewsPath = path.join(__dirname, "views");
 
@@ -555,8 +557,7 @@ app.post("/upload", upload.single("photo"), (req, res) => {
 });
 // Route pour supprimer un événement par ID
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+
 
 router.delete("/events/:id", async (req, res) => {
     const eventId = req.params.id;
