@@ -118,7 +118,7 @@ app.use((req, res, next) => {
 
 // Routes principales
 app.get("/", async (req, res) => {
-    res.render("ListeEvenements", {
+    res.render("listeEvenements", {
         titre: "Accueil | EvenementScolaire",
         style: ["/css/liste_evenement.css", "/css/listeevenment.css"],
         script: ["/js/lisedesEvenement.js", "/js/itemsCathegorie.js"],
