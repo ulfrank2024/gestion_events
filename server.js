@@ -67,6 +67,21 @@ app.use(json());
 app.use(cookieParser());
 app.use(express.static("public"));
 //multer    
+
+
+console.log("__dirname:", __dirname); // Ajoutez cette ligne
+
+const viewsPath = path.join(__dirname, "views");
+
+fs.readdir(viewsPath, (err, files) => {
+    if (err) {
+        console.error("Erreur lors de la lecture du répertoire views:", err);
+    } else {
+        console.log("Contenu du répertoire views:", files);
+    }
+});
+
+app.set("views", viewsPath);
 // Configuration de Multer
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
