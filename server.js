@@ -5,7 +5,6 @@ import { existsSync, unlinkSync } from "fs";
 import express, { json } from "express";
 import helmet from "helmet";
 import compression from "compression";
-import path from "path"; // Assurez-vous d'importer le module path
 import cors from "cors";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -59,7 +58,7 @@ const hbs = expressHandlebars.create({
 app.use("/uploads", express.static("uploads"));
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", "./views");
 // Ajout de middlewares
 app.use(helmet(cspOption));
 app.use(compression());
