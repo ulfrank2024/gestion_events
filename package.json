@@ -13,7 +13,6 @@
   "author": "ulrich, aya, Danielle, Mamounne",
   "license": "UNLICENSED",
   "dependencies": {
-    "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "chart.js": "^4.4.8",
     "compression": "^1.7.4",

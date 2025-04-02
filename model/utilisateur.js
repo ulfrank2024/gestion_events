@@ -1,5 +1,6 @@
 import { connexion } from "../db/db.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
+
 
 // ✅ Récupérer un utilisateur par ID
 export async function getUtilisateurById(id_utilisateur) {

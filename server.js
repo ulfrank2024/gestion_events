@@ -6,7 +6,7 @@ import express, { json } from "express";
 import helmet from "helmet";
 import compression from "compression";
 import cors from "cors";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cspOption from "./csp-options.js";
 import expressHandlebars from "express-handlebars";
